@@ -1,4 +1,7 @@
+import type { FormValues } from "../forms/types";
+
 export interface ButtonProps {
   label: string;
-  parentMethod: () => void;
+  parentMethod: any
+  type?: "button" | "submit" | "reset";
 }
