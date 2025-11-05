@@ -1,12 +1,13 @@
 import "./button.css";
+import type { ButtonProps } from "./types";
 
-interface Props {
-  label: string;
-  parentMethod: () => void;
-}
-export const Button = ({ label, parentMethod }: Props) => {
+export const Button = ({
+  label,
+  parentMethod,
+  type = "submit",
+}: ButtonProps) => {
   return (
-    <button className="custom-button" onClick={parentMethod}>
+    <button className="custom-button" onClick={parentMethod} type={type}>
       {label}
     </button>
   );
