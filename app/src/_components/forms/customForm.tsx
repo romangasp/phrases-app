@@ -1,41 +1,46 @@
-import { useState } from "react";
 import { Button, Input } from "..";
 
 import type { FormProps } from "./types";
+import { Controller, useForm } from "react-hook-form";
 
 export const CustomForm = ({ filters, onSubmit }: FormProps) => {
-  const [formData, setFormData] = useState<Record<string, any>>({});
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
+  const { handleSubmit, control, reset } = useForm();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const formInputsRender = (filter: any) => {
     if (filter.type === "text") {
       return (
-        <div>
-          <Input
-            label={filter.label}
-            placeholder={filter.placeholder}
-            name={filter.name}
-            value=""
-            onChange={handleChange}
-          />
-        </div>
+        <Controller
+          name={filter.name}
+          key={filter.name}
+          control={control}
+          render={({ field }) => (
+            <div>
+              <Input
+                label={filter.label}
+                placeholder={filter.placeholder}
+                {...field}
+              />
+            </div>
+          )}
+        />
       );
     }
   };
+
+    //  --linear-aura-gradient: linear-gradient(to right in oklch, #f63b35 0%, #f63b35 3%, #1265f0 7%, #477dff 17%, #2caf4f 20%, #72bb44 25%, #ffe523 27%, #ffcc25 30%, #ea4335 33%, #ea4335 45%, #1265f0 49%, #477dff 68%, #34a853 72%, #2caf4f 79%, #ffe523 82%, #ffcc25 87%, #f63b35 90%, #f63b35 100%);
   return (
-    <form id="form" onSubmit={handleSubmit}>
+    <form id="form" className="form" onSubmit={handleSubmit((data) => {
+      onSubmit(data);
+      reset();
+    })}>
       {filters.map((filter) => formInputsRender(filter))}
       <div>
-        <Button label={"Agregar nueva frase"} parentMethod={onSubmit} />
+        <Button
+          label={"Agregar nueva frase"}
+          type="submit"
+        />
       </div>
     </form>
   );

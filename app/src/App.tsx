@@ -1,15 +1,24 @@
+import { useEffect } from "react";
 import "./App.css";
 import { CustomForm } from "./_components/forms/customForm";
+import { usePhrases } from "./_lib/hooks/usePhrases";
 
 function App() {
+  const { phrases, getPhrases, addPhrase, deletePhrase, loading } =
+    usePhrases();
   const handleSubmit = (data: any) => {
     console.log("nueva frase", data);
+    addPhrase(data);
   };
+
+  useEffect(() => {
+    getPhrases();
+  }, [getPhrases]);
 
   const filters: any = [
     {
       label: "frase",
-      name: "prhase",
+      name: "phrase",
       placeholder: "Escribi una frase",
       type: "text",
     },
@@ -24,6 +33,18 @@ function App() {
   return (
     <>
       <CustomForm filters={filters} onSubmit={handleSubmit}></CustomForm>
+      {loading && <p>Cargando...</p>}
+
+      <div>
+        <ul>
+          {phrases.map((phrase) => (
+            <li key={phrase.id}>
+              "{phrase.phrase}" - {phrase.author}
+              <button onClick={() => deletePhrase(phrase.id)}>Eliminar</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
