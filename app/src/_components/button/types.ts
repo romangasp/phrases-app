@@ -2,6 +2,6 @@
 
 export interface ButtonProps {
   label: string;
-  parentMethod: any;
+  parentMethod?: any;
   type?: "button" | "submit" | "reset";
 }
