@@ -6,8 +6,8 @@ import { usePhrases } from "./_lib/hooks/usePhrases";
 function App() {
   const { phrases, getPhrases, addPhrase, deletePhrase, loading } =
     usePhrases();
+    
   const handleSubmit = (data: any) => {
-    console.log("nueva frase", data);
     addPhrase(data);
   };
 
