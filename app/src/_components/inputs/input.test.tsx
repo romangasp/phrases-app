@@ -1,8 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { Input } from "./input";
+import { Input } from "..";
 
 describe("Input component", () => {
+  const mockOnChange = vi.fn();
+  const mockOnBlur = vi.fn();
+
   it("should be render the label correctly", () => {
     render(
       <Input
@@ -10,10 +13,11 @@ describe("Input component", () => {
         placeholder="Type a phrase"
         name="phrase"
         value=""
-        onChange={() => {}}
+        onChange={mockOnChange}
+        onBlur={mockOnBlur}
       />
     );
-    expect(screen.getByText("Type a phrase")).toBeInTheDocument();
+    expect(screen.getByLabelText("Type a phrase")).toBeInTheDocument();
   });
 
   it("should be render the placeholder correctly", () => {
@@ -23,21 +27,21 @@ describe("Input component", () => {
         name="Placeholder"
         placeholder="Placeholder"
         value=""
-        onChange={() => {}}
+        onChange={mockOnChange}
+        onBlur={mockOnBlur}
       />
     );
   });
 
   it("should be call to onChange when writes on the input", () => {
-    const handleChange = vi.fn();
-
     render(
       <Input
         label="author"
         name="author"
         placeholder="Type the author"
         value=""
-        onChange={handleChange}
+        onChange={mockOnChange}
+        onBlur={mockOnBlur}
       />
     );
   });
