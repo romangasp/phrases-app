@@ -24,6 +24,7 @@ export const Input = ({
       error={!!error}
       helperText={helperText}
       size="small"
+      color="secondary"
     />
   );
 };
