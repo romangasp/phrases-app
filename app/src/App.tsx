@@ -1,7 +1,6 @@
 import { CustomForm } from "./_components/forms/customForm";
 import { CardItem } from "./_components/card/card";
 import { Spinner } from "./_components/spinner/spinner";
-
 import { inputs } from "./constants";
 import "./App.css";
 import {
@@ -17,10 +16,10 @@ const AppContent = () => {
   const handleSubmit = (data: any) => {
     addPhrase(data);
   };
-
+  const formInputs = inputs;
   return (
     <div className="container">
-      <CustomForm inputs={inputs} onSubmit={handleSubmit} />
+      <CustomForm inputs={formInputs} onSubmit={handleSubmit} />
 
       <div className="cards-container">
         <div>
