@@ -7,7 +7,6 @@ import { StyledAlert, StyledSnackbar } from "./styles";
 import type { RootState } from "../../_lib/store/store";
 import { useSelector } from "react-redux";
 
-
 const initialState: IAlertMessage = {
   message: "",
   status: "success",
@@ -18,7 +17,7 @@ const AlertMessage = () => {
   const [alertMessage, setAlertMessage] = useState(initialState);
 
   const alertMessageValue = useSelector(
-    (state: RootState) => state.alerts.alertMessage,
+    (state: RootState) => state.alerts.alertMessage
   );
 
   useEffect(() => {
@@ -42,8 +41,11 @@ const AlertMessage = () => {
           <StyledAlert
             severity={alertMessage.status}
             onClose={handleClose}
+            sx={{ color: "white" }}
             iconMapping={{
-              success: <CheckCircleOutlineIcon fontSize="inherit" />,
+              success: (
+                <CheckCircleOutlineIcon fontSize="inherit" color="secondary" />
+              ),
             }}
           >
             {alertMessage.message}

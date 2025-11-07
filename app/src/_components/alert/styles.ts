@@ -13,19 +13,9 @@ const StyledSnackbar = styled(Snackbar)<SnackbarProps>({
 });
 
 const StyledAlert = styled(Alert)<AlertProps>(({ theme }) => [
-  theme.applyStyles("dark", {
-    "&.MuiAlert-standardSuccess": {
-      backgroundColor: "#EDF7ED",
-    },
-    "&.MuiAlert-standardError": {
-      backgroundColor: "#FDEDED",
-    },
-    width: "312px",
-    justifySelf: "right",
-  }),
   theme.applyStyles("light", {
     "&.MuiAlert-standardSuccess": {
-      backgroundColor: "#EDF7ED",
+      backgroundColor: "#d0b2d0",
     },
     "&.MuiAlert-standardError": {
       backgroundColor: "#FDEDED",
