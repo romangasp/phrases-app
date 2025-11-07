@@ -1,10 +1,18 @@
 import { useCallback, useState } from "react";
 import { phrasesService } from "../services/phrasesService";
+import type { AxiosError } from "axios";
+import { alertsActions } from "../store/alerts/alert";
+import { useDispatch } from "react-redux";
 
+interface AxiosErrorResponse {
+  message?: string;
+}
 export const usePhrases = () => {
   const [phrases, setPhrases] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<AxiosError | null>(null);
+
+  const dispatch = useDispatch();
 
   const getPhrases = useCallback(async () => {
     setLoading(true);
@@ -12,7 +20,16 @@ export const usePhrases = () => {
       const data = await phrasesService.getPhrases();
       setPhrases(data);
     } catch (error: any) {
-      setError(error?.message);
+      const axiosError = error as AxiosError<AxiosErrorResponse>;
+      setError(axiosError);
+      dispatch(
+        alertsActions.setAlertMessage({
+          status: "error",
+          message:
+            axiosError?.response?.data?.message ||
+            "Error al obtener frases, intente más tarde",
+        })
+      );
     } finally {
       setLoading(false);
     }
@@ -23,9 +40,24 @@ export const usePhrases = () => {
       setLoading(true);
       try {
         await phrasesService.addPhrase(formData);
+        dispatch(
+          alertsActions.setAlertMessage({
+            status: "success",
+            message: "La frase se creó con éxito",
+          })
+        );
         await getPhrases();
       } catch (error: any) {
-        setError(error?.message);
+        const axiosError = error as AxiosError<AxiosErrorResponse>;
+        setError(axiosError);
+        dispatch(
+          alertsActions.setAlertMessage({
+            status: "error",
+            message:
+              axiosError?.response?.data?.message ||
+              "Error al crear la frase, intente más tarde",
+          })
+        );
       } finally {
         setLoading(false);
       }
@@ -41,6 +73,16 @@ export const usePhrases = () => {
         await getPhrases();
       } catch (error: any) {
         setError(error?.message);
+        const axiosError = error as AxiosError<AxiosErrorResponse>;
+        setError(axiosError);
+        dispatch(
+          alertsActions.setAlertMessage({
+            status: "error",
+            message:
+              axiosError?.response?.data?.message ||
+              "Error al eliminar la frase, intente más tarde",
+          })
+        );
       } finally {
         setLoading(false);
       }
