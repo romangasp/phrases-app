@@ -1,14 +1,19 @@
-import "./button.css";
-import type { ButtonProps } from "./types";
+import Button from "@mui/material/Button";
+import type { ButtonProps } from "@mui/material";
 
-export const Button = ({
-  label,
-  parentMethod,
-  type = "submit",
-}: ButtonProps) => {
+interface Props extends ButtonProps {
+  label: string;
+}
+
+export const CustomButton = ({ label, ...rest }: Props) => {
   return (
-    <button className="custom-button" onClick={parentMethod} type={type}>
+    <Button
+      variant="contained"
+      color="primary"
+      sx={{ borderRadius: 2, textTransform: "none", px: 3 }}
+      {...rest}
+    >
       {label}
-    </button>
+    </Button>
   );
 };
