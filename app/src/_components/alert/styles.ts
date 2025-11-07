@@ -1,8 +1,14 @@
 import {
   Alert,
+<<<<<<< HEAD
   AlertProps,
   Snackbar,
   SnackbarProps,
+=======
+  type AlertProps,
+  Snackbar,
+  type SnackbarProps,
+>>>>>>> 2d83b09b2bdafd084ee6e1fe6e96bddbcccafa5c
   styled,
 } from "@mui/material";
 
