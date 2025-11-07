@@ -1,8 +1,8 @@
 import {
   Alert,
-  AlertProps,
+  type AlertProps,
   Snackbar,
-  SnackbarProps,
+  type SnackbarProps,
   styled,
 } from "@mui/material";
 
