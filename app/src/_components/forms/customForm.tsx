@@ -5,21 +5,21 @@ import "./customForm.css";
 import type { FormProps } from "./types";
 import { Controller, useForm } from "react-hook-form";
 
-export const CustomForm = ({ filters, onSubmit }: FormProps) => {
+export const CustomForm = ({ inputs, onSubmit }: FormProps) => {
   const { handleSubmit, control, reset } = useForm();
 
-  const formInputsRender = (filter: any) => {
-    if (filter.type === "text") {
+  const formInputsRender = (input: any) => {
+    if (input.type === "text") {
       return (
         <Controller
-          key={filter.name}
-          name={filter.name}
+          key={input.name}
+          name={input.name}
           control={control}
-          rules={{ required: `${filter.label} es obligatorio` }}
+          rules={{ required: `${input.label} es obligatorio` }}
           render={({ field, fieldState }) => (
             <Input
-              label={filter.label}
-              placeholder={filter.placeholder}
+              label={input.label}
+              placeholder={input.placeholder}
               {...field}
               error={fieldState.invalid}
               helperText={fieldState.error?.message}
@@ -63,12 +63,12 @@ export const CustomForm = ({ filters, onSubmit }: FormProps) => {
           reset({ phrase: "", author: "" });
         })}
       >
-        {filters.map((filter) => formInputsRender(filter))}
+        {inputs.map((input) => formInputsRender(input))}
         <div className="form-actions">
           <CustomButton
             label={"NUEVA FRASE"}
             type="submit"
-            sx={{ fontWeight: "600", backgroundColor: "#d0b2d0"}}
+            sx={{ fontWeight: "600", backgroundColor: "#d0b2d0" }}
           />
         </div>
       </form>

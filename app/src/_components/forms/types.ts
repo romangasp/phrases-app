@@ -1,13 +1,13 @@
 import type { InputProps } from "../inputs/types";
 
 export interface FormInputsRenderProps {
-  filters: any;
+  inputs: any;
 }
 export type FormValues = {
   [key: string]: string | null;
 };
 
 export interface FormProps {
-  filters: InputProps[];
+  inputs: InputProps[];
   onSubmit: (data: FormValues) => void;
 }

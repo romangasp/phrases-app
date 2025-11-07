@@ -5,18 +5,30 @@
   background-color: #ffe2c8;
   padding: 2%;
   min-height: 100vh;
+  height: 100%;
 }
 
 .cards-grid {
   gap: 1rem;
   display: flex;
   flex-wrap: wrap;
+  min-width: 42%;
 }
 
 .cards-container {
   position: relative;
   max-width: 1200px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 950px;
+}
+
+.no-results {
+  text-align: left;
+  color: #777;
+  font-size: 0.9rem;
+  padding: px;
+  font-family: Helvetica;
 }
 
 .overlay {
