@@ -4,6 +4,7 @@ import { CustomForm } from "./_components/forms/customForm";
 import { usePhrases } from "./_lib/hooks/usePhrases";
 import { Spinner } from "./_components/spinner/spinner";
 import { CardItem } from "./_components/card/card";
+import { inputs } from "./constants";
 
 function App() {
   const { phrases, getPhrases, addPhrase, deletePhrase, loading } =
@@ -17,27 +18,19 @@ function App() {
     getPhrases();
   }, [getPhrases]);
 
-  const filters: any = [
-    {
-      label: "frase",
-      name: "phrase",
-      placeholder: "Escribi una frase",
-      type: "text",
-    },
-    {
-      label: "autor",
-      name: "author",
-      placeholder: "Escribi el author",
-      type: "text",
-    },
-  ];
+  const formInputs = inputs;
 
   return (
     <div className="container">
-      <CustomForm filters={filters} onSubmit={handleSubmit}></CustomForm>
-      {loading ? (
-        <Spinner />
-      ) : (
+      <CustomForm filters={formInputs} onSubmit={handleSubmit}></CustomForm>
+
+      <div className="cards-container">
+        {loading && (
+          <div className="overlay">
+            <Spinner />
+          </div>
+        )}
+
         <div className="cards-grid">
           {phrases.map((phrase) => (
             <CardItem
@@ -49,7 +42,7 @@ function App() {
             />
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
