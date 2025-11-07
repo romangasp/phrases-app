@@ -1,15 +1,29 @@
+import { TextField } from "@mui/material";
 import type { InputProps } from "./types";
 
-export const Input = ({ label, name,placeholder, value, onChange }: InputProps) => (
-  <div className="custom-input">
-    <label htmlFor={name}>{label}</label>
-    <input
-      id={name}
+export const Input = ({
+  label,
+  name,
+  placeholder,
+  value,
+  onChange,
+  onBlur,
+  error,
+  helperText,
+}: InputProps) => {
+  return (
+    <TextField
+      fullWidth
+      variant="outlined"
+      label={label}
       name={name}
       placeholder={placeholder}
-      type="text"
       value={value}
       onChange={onChange}
+      onBlur={onBlur}
+      error={!!error}
+      helperText={helperText}
+      size="small"
     />
-  </div>
-);
+  );
+};

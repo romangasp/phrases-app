@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import "./App.css";
 import { CustomForm } from "./_components/forms/customForm";
 import { usePhrases } from "./_lib/hooks/usePhrases";
+import { Spinner } from "./_components/spinner/spinner";
+import { CardItem } from "./_components/card/card";
 
 function App() {
   const { phrases, getPhrases, addPhrase, deletePhrase, loading } =
     usePhrases();
-    
+
   const handleSubmit = (data: any) => {
     addPhrase(data);
   };
@@ -31,21 +33,24 @@ function App() {
   ];
 
   return (
-    <>
+    <div className="container">
       <CustomForm filters={filters} onSubmit={handleSubmit}></CustomForm>
-      {loading && <p>Cargando...</p>}
-
-      <div>
-        <ul>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="cards-grid">
           {phrases.map((phrase) => (
-            <li key={phrase.id}>
-              "{phrase.phrase}" - {phrase.author}
-              <button onClick={() => deletePhrase(phrase.id)}>Eliminar</button>
-            </li>
+            <CardItem
+              key={phrase.id}
+              id={phrase.id}
+              text={phrase.phrase}
+              author={phrase.author}
+              onDelete={() => deletePhrase(phrase.id)}
+            />
           ))}
-        </ul>
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 }
 

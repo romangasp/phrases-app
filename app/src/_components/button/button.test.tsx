@@ -1,18 +1,18 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
-import { Button } from "./button";
+import { CustomButton } from "./button";
 
-describe("Button component", () => {
+describe("CustomButton", () => {
   it("should be render the label correctly", () => {
-    render(<Button label="Add phrase" parentMethod={() => {}} />);
-    expect(screen.getByText("Add phrase")).toBeInTheDocument();
+    render(<CustomButton label="Save" />);
+    expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
   });
 
-  it("should be eject parentMethod to do click", () => {
-    const mockFn = vi.fn();
-    render(<Button label="Press" parentMethod={mockFn} />);
+  it("should be execute onClick to do Click", () => {
+    const handleClick = vi.fn();
+    render(<CustomButton label="Send" onClick={handleClick} />);
 
-    fireEvent.click(screen.getByText("Press"));
-    expect(mockFn).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole("button", { name: "Send" }));
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

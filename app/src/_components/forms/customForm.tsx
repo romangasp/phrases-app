@@ -1,4 +1,4 @@
-import { Button, Input } from "..";
+import { CustomButton, Input } from "..";
 
 import type { FormProps } from "./types";
 import { Controller, useForm } from "react-hook-form";
@@ -10,17 +10,18 @@ export const CustomForm = ({ filters, onSubmit }: FormProps) => {
     if (filter.type === "text") {
       return (
         <Controller
-          name={filter.name}
           key={filter.name}
+          name={filter.name}
           control={control}
-          render={({ field }) => (
-            <div>
-              <Input
-                label={filter.label}
-                placeholder={filter.placeholder}
-                {...field}
-              />
-            </div>
+          rules={{ required: `${filter.label} es obligatorio` }}
+          render={({ field, fieldState }) => (
+            <Input
+              label={filter.label}
+              placeholder={filter.placeholder}
+              {...field}
+              error={fieldState.invalid}
+              helperText={fieldState.error?.message}
+            />
           )}
         />
       );
@@ -38,8 +39,8 @@ export const CustomForm = ({ filters, onSubmit }: FormProps) => {
       })}
     >
       {filters.map((filter) => formInputsRender(filter))}
-      <div>
-        <Button label={"Agregar nueva frase"} type="submit" />
+      <div className="form-actions">
+        <CustomButton label={"Nueva frase"} type="submit" />
       </div>
     </form>
   );
