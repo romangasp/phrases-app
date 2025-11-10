@@ -1,5 +1,4 @@
 import { CustomForm } from "./_components/forms/customForm";
-import { CardItem } from "./_components/card/card";
 import { Spinner } from "./_components/spinner/spinner";
 import { inputs } from "./constants";
 import "./App.css";
@@ -8,6 +7,7 @@ import {
   usePhrasesContext,
 } from "./_lib/contexts/phrasesContext";
 import { SearchInput } from "./_components/search/searchInput";
+import { CardGrid } from "./_components/cardGrid/cardGrid";
 
 const AppContent = () => {
   const { filteredPhrases, addPhrase, deletePhrase, loading } =
@@ -19,14 +19,16 @@ const AppContent = () => {
   const formInputs = inputs;
   return (
     <div className="container">
-      <CustomForm inputs={formInputs} onSubmit={handleSubmit} />
+      <div className="form-container">
+        <CustomForm inputs={formInputs} onSubmit={handleSubmit} />
+      </div>
 
       <div className="cards-container">
-        <div>
+        <div className="search-box">
           <SearchInput />
         </div>
         {loading && (
-          <div className="overlay">
+          <div className="spinner-container">
             <Spinner />
           </div>
         )}
@@ -38,15 +40,14 @@ const AppContent = () => {
         )}
         {!loading && filteredPhrases?.length > 0 && (
           <div className="cards-grid">
-            {filteredPhrases.map((phrase: any) => (
-              <CardItem
-                key={phrase.id}
-                id={phrase.id}
-                text={phrase.phrase}
-                author={phrase.author}
-                onDelete={() => deletePhrase(phrase.id)}
-              />
-            ))}
+            <CardGrid
+              items={filteredPhrases.map((phrase: any) => ({
+                id: phrase.id,
+                text: phrase.phrase,
+                author: phrase.author,
+              }))}
+              onDelete={deletePhrase}
+            />
           </div>
         )}
       </div>
