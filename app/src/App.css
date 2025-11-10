@@ -6,13 +6,10 @@
   padding: 2%;
   min-height: 100vh;
   height: 100%;
-<<<<<<< HEAD
 }
 
 .form-container {
   height: 100%;
-=======
->>>>>>> 8182a8208be56471caeace3b00317c1a644830c2
 }
 
 .cards-grid {
@@ -28,20 +25,9 @@
   display: flex;
   flex-direction: column;
   width: 950px;
-<<<<<<< HEAD
   .search-box {
     width: 50%;
   }
-=======
-}
-
-.no-results {
-  text-align: left;
-  color: #777;
-  font-size: 0.9rem;
-  padding: px;
-  font-family: Helvetica;
->>>>>>> 8182a8208be56471caeace3b00317c1a644830c2
 }
 
 .no-results {
