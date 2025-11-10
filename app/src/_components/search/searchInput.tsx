@@ -2,7 +2,6 @@ import { TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { usePhrasesContext } from "../../_lib/contexts/phrasesContext";
 
-
 export const SearchInput = () => {
   const { handleSearch } = usePhrasesContext();
 
@@ -24,7 +23,7 @@ export const SearchInput = () => {
         ),
       }}
       size="small"
-      sx={{ mb: 3, maxWidth: "42%" }}
+      sx={{ mb: 3 }}
       color="secondary"
     />
   );
