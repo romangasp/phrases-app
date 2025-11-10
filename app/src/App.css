@@ -8,11 +8,14 @@
   height: 100%;
 }
 
+.form-container {
+  height: 100%;
+}
+
 .cards-grid {
   gap: 1rem;
   display: flex;
   flex-wrap: wrap;
-  min-width: 42%;
 }
 
 .cards-container {
@@ -21,6 +24,9 @@
   display: flex;
   flex-direction: column;
   width: 950px;
+  .search-box {
+    width: 50%;
+  }
 }
 
 .no-results {
@@ -31,16 +37,30 @@
   font-family: Helvetica;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.6);
-  z-index: 10;
-  backdrop-filter: blur(2px);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .cards-container {
+    width: 100%;
+    search-box {
+      width: 100%;
+    }
+  }
+  .cards-grid {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
 }

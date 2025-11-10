@@ -12,24 +12,33 @@ interface CardItemProps {
   text: string;
   author: string;
   onDelete: (id: string) => void;
+  quoteText?: boolean;
 }
 
-export const CardItem = ({ id, text, author, onDelete }: CardItemProps) => (
+export const CardItem = ({
+  id,
+  text,
+  author,
+  onDelete,
+  quoteText,
+}: CardItemProps) => (
   <Card
     sx={{
       borderRadius: 2,
       boxShadow: 3,
       p: 1,
-      width: "40%",
       backgroundColor: "#f1f1f1",
     }}
   >
-    <CardContent sx={{ display: "flex", flexDirection: "column" }}>
+    <CardContent
+      sx={{ display: "flex", flexDirection: "column", width: "100%" }}
+    >
       <Stack
         sx={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          maxWidth: "95%",
         }}
       >
         <Typography
@@ -44,10 +53,10 @@ export const CardItem = ({ id, text, author, onDelete }: CardItemProps) => (
             display: "flex",
             alignItems: "center",
             fontWeight: 500,
-            color: "grey"
+            color: "grey",
           }}
         >
-          “{text}”
+          {quoteText ? `“${text}”` : text}
         </Typography>
         <IconButton color="secondary" onClick={() => onDelete(id)}>
           <DeleteIcon />
@@ -55,7 +64,13 @@ export const CardItem = ({ id, text, author, onDelete }: CardItemProps) => (
       </Stack>
 
       <Stack sx={{ display: "flex", flexDirection: "row" }}>
-        <Typography variant="body1" color="#cd8fcd" fontWeight={600} fontSize={"0.9rem"} mb={2}>
+        <Typography
+          variant="body1"
+          color="#cd8fcd"
+          fontWeight={600}
+          fontSize={"0.9rem"}
+          mb={2}
+        >
           {author}
         </Typography>
       </Stack>
