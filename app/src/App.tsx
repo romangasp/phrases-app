@@ -1,5 +1,4 @@
 import { CustomForm } from "./_components/forms/customForm";
-import { CardItem } from "./_components/card/card";
 import { Spinner } from "./_components/spinner/spinner";
 import { inputs } from "./constants";
 import "./App.css";
